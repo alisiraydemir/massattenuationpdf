@@ -1,0 +1,28 @@
+# You can download wkhtmltopdf from this website: https://wkhtmltopdf.org/downloads.html
+# pip install pdfkit
+import pdfkit
+
+# URLs to save as PDFs
+urls = ["https://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z{:02d}.html".format(i) for i in range(1, 93)]
+
+# PDF configuration options
+pdf_options = {
+    'page-size': 'Letter',
+    'margin-top': '0mm',
+    'margin-right': '0mm',
+    'margin-bottom': '0mm',
+    'margin-left': '0mm'
+}
+
+# Output file name
+output_file = 'all_pages.pdf'
+
+# Specify the path to the wkhtmltopdf executable
+path_to_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+
+# Set the configuration
+configuration = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
+
+# Save each URL as a separate PDF
+# For each URL in the urls list, a separate PDF file will be generated. These individual PDF files will then be combined into a single PDF file named 'all_pages.pdf'.
+pdfkit.from_url(urls, output_file, options=pdf_options, configuration=configuration)
